@@ -71,50 +71,52 @@ const Signin = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="identifier"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Enter Email/Username</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder="email/username"
-                   
-                />
-              </FormControl>
-               
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? (
-            <>
-              <span>Loading</span>
-              <Loader className="animate-spin" />
-            </>
-          ) : (
-            "Submit"
-          )}
-        </Button>
-      </form>
+      <div  className=" flex justify-center p-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 shadow-md shadow-blue-300 rounded-md border flex flex-col p-8 w-[400px]">
+          <FormField
+            control={form.control}
+            name="identifier"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Enter Email/Username</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="email/username"
+                    
+                  />
+                </FormControl>
+                
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input type="password" placeholder="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button className="font-bold" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <div className="flex gap-2">
+                <span>Loading</span>
+                <Loader className="animate-spin" />
+              </div>
+            ) : (
+              "SigIn"
+            )}
+          </Button>
+        </form>
+      </div>  
     </Form>
   );
 };

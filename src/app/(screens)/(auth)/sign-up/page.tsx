@@ -94,73 +94,78 @@ const Signup = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder="Username"
-                  onChange={(e) => {
-                    debounced(e.target.value);
-                    field.onChange(e.target.value);
-                    
-                  }}
-                />
-              </FormControl>
-              {isCheckingUsername ? (
-                <>
-                  <span>Loading</span>
-                  <Loader className="animate-spin" />
-                </>
-              ) : (
-                <p className={`${(usernameMessage.includes("unique") ? "" : "text-red-500")}`}>{usernameMessage}</p>
-              )}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={isSubmitting || usernameMessage.includes('taken')}>
-          {isSubmitting ? (
-            <>
-              <span>Loading</span>
-              <Loader className="animate-spin" />
-            </>
-          ) : (
-            "Submit"
-          )}
-        </Button>
-      </form>
+      <div className=" flex justify-center p-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 shadow-md shadow-blue-300 rounded-md border flex flex-col p-8 w-[400px]">
+          <div className="font-bold text-lg">
+            Welcome to Honest Insights !!
+          </div>
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Username"
+                    onChange={(e) => {
+                      debounced(e.target.value);
+                      field.onChange(e.target.value);
+                      
+                    }}
+                  />
+                </FormControl>
+                {isCheckingUsername ? (
+                  <div className="flex items-center gap-2">
+                    <span>Loading</span>
+                    <Loader className="animate-spin" />
+                  </div>
+                ) : (
+                  usernameMessage ? <><p className={`${(usernameMessage.includes("unique") ? "" : "text-red-500")} `}>{usernameMessage}</p></>: <></>
+                )}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button className="font-bold" type="submit" disabled={isSubmitting || usernameMessage.includes('taken')}>
+            {isSubmitting ? (
+              <div className="flex items-center gap-2">
+                <span>Loading</span>
+                <Loader className="animate-spin" />
+              </div>
+            ) : (
+              "Signup"
+            )}
+          </Button>
+        </form>
+      </div>
     </Form>
   );
 };
