@@ -32,16 +32,6 @@ const Dashboard = () => {
 
   const acceptMessageState = watch('acceptMessages')
 
-  // constants and variables
-  const profileUrl = "https://truefeedback.in/u/jatin";
-
-  // functions
-  const handleCopyToClipboard = () => {
-    toast({
-      title: "URL Copied",
-    });
-  };
-
   const handleRefresh = () => {
     console.log("refresh");
     setIsMessagesLoading(true);
@@ -127,6 +117,19 @@ const Dashboard = () => {
   const { data: session, status } = useSession();
 
   if (!session || !session.user) return <div>Please login</div>;
+  const username  = session.user.username
+  const baseUrl = `${window.location.protocol}/${window.location.host}`
+  const profileUrl = `${baseUrl}/u/${username}`
+
+  const handleCopyToClipboard = () => {
+    navigator.clipboard.writeText(profileUrl)
+    toast({
+      title: "URL Copied",
+      description: profileUrl
+    });
+  };
+
+
 
   return (
     <>

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import Autoplay from 'embla-carousel-autoplay'
+import messages from "../message.json"
 
 const Home = () => {
   
@@ -25,16 +26,18 @@ const Home = () => {
           True feedback where your identify remains a secret
         </div>
         {/* crousel  */}
-        <Carousel plugins={[Autoplay({ delay: 2000 })]} className="w-full max-w-xs">
+        <Carousel plugins={[Autoplay({ delay: 2000,stopOnMouseEnter:true,stopOnInteraction:false })]} className="w-full max-w-[500px]">
           <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
+            {messages.map((message, index) => (
               <CarouselItem key={index}>
                 <div className="p-1">
                   <Card>
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-4xl font-semibold">
-                        {index + 1}
+                    <CardContent className=" p-4">
+                      <span className="text-2xl font-semibold">
+                        {message.title}
                       </span>
+                      <div className="mt-3 mb-1">{message.content}</div>
+                      <div className="text-sm">{message.received}</div>
                     </CardContent>
                   </Card>
                 </div>
