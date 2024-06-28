@@ -163,8 +163,8 @@ const Dashboard = () => {
 
         {/* list of message cards  */}
         <div className="mt-4 grid grid-cols-2 gap-4">
-          {messages.map((message) => (
-            <MessageCard key={message.id} message={message} />
+          {messages.map((message,idx) => (
+            <MessageCard key={idx} message={message} />
           ))}
           {/* <MessageCard
           message={{ content: "something ", createdAt: new Date() }}
