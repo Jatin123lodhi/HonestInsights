@@ -102,7 +102,7 @@ const Signup = () => {
       <div className=" flex justify-center p-4">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="shadow-md shadow-blue-300 rounded-md border flex flex-col px-8 py-4 w-[450px]"
+          className="shadow-md rounded-md border flex flex-col px-8 py-4 w-[450px]"
         >
           <div className="text-4xl my-2 font-bold text-center">
             Welcome to Honest Insights
@@ -192,7 +192,7 @@ const Signup = () => {
               )}
             </Button>
           </div>
-          <div className="text-center my-4">{`Already a member ?  `}<Link className=" text-blue-700 font-semibold" href="/sign-in">SignIn</Link></div>
+          <div className="text-center my-4">{`Already a member ?  `}<Link className=" text-blue-600 font-semibold" href="/sign-in">SignIn</Link></div>
         </form>
       </div>
     </Form>

@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "./ui/button";
+import { AvatarComp } from "./AvatarComp";
 
 const Navbar = () => {
   const session = useSession();
@@ -15,6 +16,7 @@ const Navbar = () => {
       case "authenticated":
         return (
           <div className="flex gap-4 items-center">
+            <AvatarComp fallback={data?.user?.username?.charAt(0)}/>
             <div>Welcome, {data?.user?.username}</div>
             <Button onClick={() => signOut()}>Logout</Button>
             <Button onClick={() => route.replace("/dashboard")}>

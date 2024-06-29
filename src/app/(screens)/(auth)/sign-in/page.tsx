@@ -71,10 +71,10 @@ const Signin = () => {
 
   return (
     <Form {...form}>
-      <div className=" flex justify-center p-4 pt-12">
+      <div className=" flex justify-center p-4 pt-12 ">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="shadow-md shadow-blue-300 rounded-md border flex flex-col p-8 w-[450px]"
+          className="shadow-lg  rounded-md border flex flex-col p-8 w-[450px]"
         >
           <div className="text-4xl my-2 font-bold text-center">
             Welcome to Honest Insights
@@ -115,9 +115,7 @@ const Signin = () => {
               className="font-bold"
               type="submit"
               disabled={
-                isSubmitting ||
-                form.getValues("identifier").length == 0 ||
-                form.getValues("password").length == 0
+                isSubmitting
               }
             >
               {isSubmitting ? (
@@ -130,6 +128,7 @@ const Signin = () => {
               )}
             </Button>
           </div>
+          <div className="text-center my-4">{`Don't have an account ?  `}<Link className=" text-blue-600 font-semibold" href="/sign-up">Signup</Link></div>
         </form>
       </div>
     </Form>

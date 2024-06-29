@@ -148,13 +148,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="mx-[8%]">
-        <div className="text-3xl mt-8">User Dashboard</div>
+      <div className="px-[8%] bg-slate-100">
+        <div className="text-3xl pt-8">User Dashboard</div>
 
         <div className="text-lg mt-8">Copy your unique link</div>
         <div className="flex gap-4 mt-2">
           <input
-            className="flex-1 rounded-md px-4 bg-[#e9ecef]"
+            className="flex-1 rounded-md px-4 bg-[#e0e8f2]"
             type="text"
             value={profileUrl}
             disabled
@@ -169,7 +169,7 @@ const Dashboard = () => {
            checked={acceptMessageState}
            onCheckedChange={handleSwitchChange} 
            />
-          <div>Accept Messages: {acceptMessageState ? 'On' : 'Off'}</div>
+          <div>Accept Messages: <span className="font-semibold">{acceptMessageState ? 'On' : 'Off'}</span></div>
         </div>
         <Separator />
 
