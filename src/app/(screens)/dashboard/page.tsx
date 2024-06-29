@@ -41,12 +41,7 @@ const Dashboard = () => {
     }, 2000);
   };
 
-  const handleDeleteMessage = (messageId: string) => {
-    console.log("delete message");
-    setMessages(messages.filter((message) => message._id !== messageId)); // optimitic ui - first do ui changes then backend changes
-    //TODO: doubt when to use .id  and when to use ._id
-  };
-
+ 
   const fetchAcceptMessageState = useCallback(async () => {
     setIsSwitchLoading(true);
     try {
@@ -83,7 +78,7 @@ const Dashboard = () => {
     setIsSwitchLoading(true)
     try{
       const response = await axios.get<ApiResponse>('/api/get-messages')
-      console.log(response, 'hihi')
+      
       if(response.data.success){
         setMessages(response?.data?.messages || []) 
         if(refresh){
@@ -93,7 +88,6 @@ const Dashboard = () => {
           })
         }
       }
-      console.log(response)
     }catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       if (axiosError.response && axiosError.response.status === 400) {
@@ -192,9 +186,9 @@ const Dashboard = () => {
         </div>
 
         {/* list of message cards  */}
-        <div className="mt-4 grid grid-cols-2 gap-4">
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           {messages.map((message,idx) => (
-            <MessageCard key={idx} message={message} />
+            <MessageCard key={idx} message={message} onDeleteSuccess={()=>fetchMessages()} />
           ))}
         
         </div>
