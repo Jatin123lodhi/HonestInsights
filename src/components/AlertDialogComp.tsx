@@ -13,17 +13,15 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
 type AlertDialogCompProps = {
-  onMessageDelete: () => void;
   handleContinue: () => void;
 };
 export function AlertDialogComp({
-  onMessageDelete,
   handleContinue,
 }: AlertDialogCompProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button onClick={onMessageDelete} variant="destructive">
+        <Button variant="destructive">
           <X />
         </Button>
       </AlertDialogTrigger>
