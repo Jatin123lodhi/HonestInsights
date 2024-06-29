@@ -91,7 +91,7 @@ export const GET = async (request: Request) => {
     return Response.json(
         {
           success: true,
-          isAcceptingMessages : user.isAcceptingMessage,
+          isAcceptingMessage : user.isAcceptingMessage,
           message: "Successfully got the status of message acceptance",
         },
         { status: 200 }
