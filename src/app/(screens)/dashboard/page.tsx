@@ -1,5 +1,6 @@
 "use client";
 import MessageCard from "@/components/MessageCard";
+import { MessageCardSkeleton } from "@/components/MessageCardSkeleton";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
@@ -188,7 +189,10 @@ const Dashboard = () => {
           {messages.map((message,idx) => (
             <MessageCard key={idx} message={message} onDeleteSuccess={()=>fetchMessages()} />
           ))}
-        
+          {
+            isMessagesLoading && new Array(6).fill('').map((e,idx)=><MessageCardSkeleton key={idx}/>)
+          }
+           
         </div>
       </div>
     </>
