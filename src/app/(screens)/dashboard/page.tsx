@@ -30,7 +30,8 @@ const Dashboard = () => {
     },
   });
 
-  const acceptMessageState = watch('acceptMessages')
+  const acceptMessageState = watch('acceptMessages',true)
+ 
 
   const handleRefresh = () => {
     console.log("refresh");
@@ -73,6 +74,7 @@ const Dashboard = () => {
       }
     } finally {
       setIsMessagesLoading(false);
+      setIsSwitchLoading(false);
     }
   }, [setValue,toast]); // TODO: research more on these dependencies
 
@@ -81,6 +83,7 @@ const Dashboard = () => {
     setIsSwitchLoading(true)
     try{
       const response = await axios.get<ApiResponse>('/api/get-messages')
+      console.log(response, 'hihi')
       if(response.data.success){
         setMessages(response?.data?.messages || []) 
         if(refresh){
@@ -105,16 +108,18 @@ const Dashboard = () => {
       }
     }finally{
       setIsMessagesLoading(false)
-      setIsSwitchLoading(true)
+      setIsSwitchLoading(false)
     }
   },[])
 
-  useEffect(() => {
-    // fetchAcceptMessageState();
-    fetchMessages();
-  }, []);
-
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if(!session || !session.user) return 
+    fetchMessages();
+    fetchAcceptMessageState()
+  }, [fetchAcceptMessageState, fetchMessages, session]);
+
 
   if (!session || !session.user) return <div>Please login</div>;
   const username  = session.user.username
@@ -129,7 +134,24 @@ const Dashboard = () => {
     });
   };
 
-
+  const handleSwitchChange = async()=>{
+     try{
+      // make an api call
+      setIsSwitchLoading(true)
+      const response = await axios.post(`/api/accept-messages`,{
+        acceptMessages: !acceptMessageState
+      })
+      setValue('acceptMessages',!acceptMessageState)
+      toast({
+        title: "Success",
+        description: response.data.message
+      })
+     }catch(error){
+      console.log(error)
+     }finally{
+      setIsSwitchLoading(false)
+     }
+  }
 
   return (
     <>
@@ -139,7 +161,7 @@ const Dashboard = () => {
         <div className="text-lg mt-8">Copy your unique link</div>
         <div className="flex gap-4 mt-2">
           <input
-            className="flex-1 rounded-md px-4"
+            className="flex-1 rounded-md px-4 bg-[#e9ecef]"
             type="text"
             value={profileUrl}
             disabled
@@ -148,8 +170,13 @@ const Dashboard = () => {
         </div>
 
         <div className="flex items-center gap-4 my-8">
-          <Switch {...register("acceptMessages")} />
-          <div>Accept Messages: On</div>
+          <Switch 
+           {...register("acceptMessages")}
+           disabled={isSwitchStateLoading}
+           checked={acceptMessageState}
+           onCheckedChange={handleSwitchChange} 
+           />
+          <div>Accept Messages: {acceptMessageState ? 'On' : 'Off'}</div>
         </div>
         <Separator />
 
@@ -169,18 +196,7 @@ const Dashboard = () => {
           {messages.map((message,idx) => (
             <MessageCard key={idx} message={message} />
           ))}
-          {/* <MessageCard
-          message={{ content: "something ", createdAt: new Date() }}
-        />
-        <MessageCard
-          message={{ content: "something ", createdAt: new Date() }}
-        />
-        <MessageCard
-          message={{ content: "something ", createdAt: new Date() }}
-        />
-        <MessageCard
-          message={{ content: "something ", createdAt: new Date() }}
-        /> */}
+        
         </div>
       </div>
     </>
