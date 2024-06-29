@@ -15,21 +15,45 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { messageSchema } from "@/schemas/messageSchema";
 import { useParams } from "next/navigation";
+import { z } from "zod";
+import axios from "axios";
+import { toast } from "@/components/ui/use-toast";
 
 const UserPublicProfilePage = () => {
   // hooks
   const params = useParams();
 
+  // TODO:
+  // there should be a check if there exists a correct username
+  // if not redirect or show some error message
+
   const form = useForm({
     resolver: zodResolver(messageSchema),
     defaultValues: {
-      message: "",
+      content: "",
     },
   });
 
+  type MessageSchema = z.infer<typeof messageSchema>;
+
   // functions
-  const onSubmit = () => {
-    console.log("on submit");
+  const onSubmit = async (formData: MessageSchema) => {
+    try {
+      const response = await axios.post(`/api/send-message`, {
+        username: params?.username,
+        content: formData.content,
+      });
+      console.log(response);
+      if (response?.data?.success) {
+        toast({
+          title: "Success",
+          description: response?.data?.message,
+        });
+        form.reset()
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -46,7 +70,7 @@ const UserPublicProfilePage = () => {
         >
           <FormField
             control={form.control}
-            name="message"
+            name="content"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -54,6 +78,7 @@ const UserPublicProfilePage = () => {
                 </FormLabel>
                 <FormControl>
                   <Textarea
+                    className="bg-[#1e1e1f]"
                     placeholder="Write your anonymous message here"
                     {...field}
                   />
@@ -63,7 +88,12 @@ const UserPublicProfilePage = () => {
             )}
           />
           <div className="flex justify-center">
-            <Button disabled={form.getValues("message").length===0} type="submit">Send It</Button>
+            <Button
+              disabled={form.getValues("content").length === 0}
+              type="submit"
+            >
+              Send It
+            </Button>
           </div>
 
           {/* suggestion part  */}
