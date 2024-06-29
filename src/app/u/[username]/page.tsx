@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import {
@@ -18,11 +18,13 @@ import { useParams } from "next/navigation";
 import { z } from "zod";
 import axios from "axios";
 import { toast } from "@/components/ui/use-toast";
+import messages from "../../../message.json"
 
 const UserPublicProfilePage = () => {
   // hooks
   const params = useParams();
-
+  const [isLoading,setIsLoading] = useState(false)
+  
   // TODO:
   // there should be a check if there exists a correct username
   // if not redirect or show some error message
@@ -34,10 +36,13 @@ const UserPublicProfilePage = () => {
     },
   });
 
+  const messageContent = form.watch('content')
+
   type MessageSchema = z.infer<typeof messageSchema>;
 
   // functions
   const onSubmit = async (formData: MessageSchema) => {
+    setIsLoading(true)
     try {
       const response = await axios.post(`/api/send-message`, {
         username: params?.username,
@@ -53,6 +58,8 @@ const UserPublicProfilePage = () => {
       }
     } catch (error) {
       console.log(error);
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -89,7 +96,7 @@ const UserPublicProfilePage = () => {
           />
           <div className="flex justify-center">
             <Button
-              disabled={form.getValues("content").length === 0}
+              disabled={!messageContent || isLoading}
               type="submit"
             >
               Send It
@@ -98,14 +105,14 @@ const UserPublicProfilePage = () => {
 
           {/* suggestion part  */}
           <div>
-            <Button>Suggest Messages</Button>
+            <Button type="button">Suggest Messages</Button>
             <div className="my-4">Click on any message below to select it.</div>
             <div className="p-8 rounded-md border">
               <div className="text-xl my-2">Messages</div>
               <div className="flex flex-col gap-4 mt-4">
-                <div className="p-2 rounded-md border text-center hover:bg-gray-200 cursor-pointer">{`What's your favourite movie`}</div>
-                <div className="p-2 rounded-md border text-center hover:bg-gray-200 cursor-pointer">{`What's your favourite book`}</div>
-                <div className="p-2 rounded-md border text-center hover:bg-gray-200 cursor-pointer">{`What's your favourite sports`}</div>
+                {messages.map((msg,idx)=>(
+                <div onClick={()=>form.setValue('content',msg.content)} key={idx} className="p-2 rounded-md border text-center hover:bg-gray-200 cursor-pointer">{msg.content}</div>
+                ))}
               </div>
             </div>
           </div>
