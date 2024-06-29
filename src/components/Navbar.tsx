@@ -41,7 +41,7 @@ const Navbar = () => {
   };
   return (
     <div className="p-6 text-white flex justify-around items-center bg-gray-800">
-      <div className="font-bold text-xl">Honest Insights</div>
+      <div className="font-bold text-xl cursor-pointer" onClick={()=>route.replace('/')}>Honest Insights</div>
       <div>{renderButton()}</div>
     </div>
   );

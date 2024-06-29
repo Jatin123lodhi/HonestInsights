@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className='p-6  rounded-md flex justify-around items-center bg-gray-800'>
          
-        <div>
+        <div className='text-white'>
             © 2024 Honest Insights. All rights reserved.
         </div>
     </div>

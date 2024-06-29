@@ -35,6 +35,7 @@ const Dashboard = () => {
 
   const handleRefresh = () => {
     fetchMessages();
+    toast({description:'Refreshed!'})
   };
 
  
