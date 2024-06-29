@@ -16,9 +16,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { messageSchema } from "@/schemas/messageSchema";
 import { useParams } from "next/navigation";
 import { z } from "zod";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { toast } from "@/components/ui/use-toast";
 import messages from "../../../message.json"
+import { ApiResponse } from "@/types/ApiResponse";
 
 const UserPublicProfilePage = () => {
   // hooks
@@ -57,7 +58,11 @@ const UserPublicProfilePage = () => {
         form.reset()
       }
     } catch (error) {
-      console.log(error);
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast({
+        title: 'Info',
+        description: axiosError?.response?.data?.message || "Failed to send message"
+      })
     }finally{
       setIsLoading(false)
     }
