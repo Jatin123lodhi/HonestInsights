@@ -34,11 +34,7 @@ const Dashboard = () => {
  
 
   const handleRefresh = () => {
-    console.log("refresh");
-    setIsMessagesLoading(true);
-    setTimeout(() => {
-      setIsMessagesLoading(false);
-    }, 2000);
+    fetchMessages();
   };
 
  
@@ -47,10 +43,10 @@ const Dashboard = () => {
     try {
       const response = await axios.get<ApiResponse>("/api/accept-messages");
       const { data } = response;
-
+      console.log(response,'  response of is acceptiong message')
       const { success, isAcceptingMessage } = data;
       if (success) {
-        console.log(isAcceptingMessage);
+        console.log(isAcceptingMessage,'  isAcceptingMessage after fetching');
         setValue("acceptMessages", Boolean(isAcceptingMessage));
       }else{
         console.log('something went wrong while fetching accept message state')
@@ -132,6 +128,7 @@ const Dashboard = () => {
      try{
       // make an api call
       setIsSwitchLoading(true)
+      
       const response = await axios.post(`/api/accept-messages`,{
         acceptMessages: !acceptMessageState
       })
