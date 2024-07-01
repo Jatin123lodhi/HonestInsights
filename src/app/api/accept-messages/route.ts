@@ -24,8 +24,8 @@ export const POST = async (request: Request) => {
   const userId = user._id;
   const { acceptMessages } = await request.json();
   try {
-    const updatedUser = await UserModel.findByIdAndUpdate(
-      userId,
+    const updatedUser = await UserModel.findOneAndUpdate(
+      {email:user.email},
       { isAcceptingMessage: acceptMessages },
       { new: true }
     );
