@@ -6,7 +6,7 @@ export const POST = async(request:Request)=>{
     await dbConnect();
     const {username, content} = await request.json()
     try{
-       const user = await UserModel.findOne({username})
+       const user = await UserModel.findOne({$or: [{ username }, { email: decodeURIComponent(username) }]})
        if(!user){
         return Response.json({
             success: false,

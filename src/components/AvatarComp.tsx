@@ -4,10 +4,10 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
   
-  export function AvatarComp({fallback}:{fallback?:string}) {
+  export function AvatarComp({fallback,source}:{fallback?:string,source?:string | undefined}) {
     return (
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarImage src={source ?? "https://github.com/shadcn.png"} alt="@shadcn" />
         <AvatarFallback>{fallback ?? `CN`}</AvatarFallback>
       </Avatar>
     )

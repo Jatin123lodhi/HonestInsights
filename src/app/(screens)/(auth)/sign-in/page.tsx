@@ -23,6 +23,7 @@ import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 import { signInSchema } from "@/schemas/signInSchema";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 
 const Signin = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -127,6 +128,7 @@ const Signin = () => {
                 "SigIn"
               )}
             </Button>
+            <Button className="font-bold" type="button" onClick={()=>signIn("github")}>Signin with Github <Image className="ml-2" height={20} width={20} src={"/github-logo.png"} alt="logo"/></Button>
           </div>
           <div className="text-center my-4">{`Don't have an account ?  `}<Link className=" text-blue-600 font-semibold" href="/sign-up">Signup</Link></div>
         </form>

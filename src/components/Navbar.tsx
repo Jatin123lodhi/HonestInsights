@@ -10,14 +10,13 @@ const Navbar = () => {
   const route = useRouter();
   const pathname = usePathname();
   const { status, data } = session;
-
   const renderButton = () => {
     switch (status) {
       case "authenticated":
         return (
           <div className="flex gap-4 items-center">
-            <AvatarComp fallback={data?.user?.username?.charAt(0)}/>
-            <div>Welcome, {data?.user?.username}</div>
+            <div>Welcome, {data?.user?.username || data?.user?.email}</div>
+            <AvatarComp source={data?.user?.image || undefined} fallback={data?.user?.username?.charAt(0)}/>
             <Button onClick={() => signOut()}>Logout</Button>
             <Button onClick={() => route.replace("/dashboard")}>
               Dashboard

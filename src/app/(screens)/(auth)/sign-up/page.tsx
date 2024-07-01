@@ -21,6 +21,8 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
 import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
+import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -102,7 +104,7 @@ const Signup = () => {
       <div className=" flex justify-center p-4">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="shadow-md rounded-md border flex flex-col px-8 py-4 w-[450px]"
+          className="shadow-lg rounded-md border flex flex-col px-8 py-4 w-[450px]"
         >
           <div className="text-4xl my-2 font-bold text-center">
             Welcome to Honest Insights
@@ -191,6 +193,7 @@ const Signup = () => {
                 "Signup"
               )}
             </Button>
+            <Button className="font-bold" type="button" onClick={()=>signIn("github")}>Signup with Github <Image className="ml-2" height={20} width={20} src={"/github-logo.png"} alt="logo"/></Button>
           </div>
           <div className="text-center my-4">{`Already a member ?  `}<Link className=" text-blue-600 font-semibold" href="/sign-in">SignIn</Link></div>
         </form>

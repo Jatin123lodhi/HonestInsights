@@ -9,7 +9,6 @@ export const GET = async (request: Request) => {
 
   const session = await getServerSession(authOptions);
   const user: User = session?.user as User;
-
   if (!session || !user) {
     return Response.json(
       {
@@ -20,12 +19,12 @@ export const GET = async (request: Request) => {
     );
   }
 
-  const userId = new mongoose.Types.ObjectId(user._id);
+  const email = user.email
   try {
     const user = await UserModel.aggregate([
       {
         $match: {
-          _id: userId,
+          email: email
         },
       },
       {

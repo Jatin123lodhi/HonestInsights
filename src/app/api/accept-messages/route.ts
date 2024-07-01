@@ -76,9 +76,9 @@ export const GET = async (request: Request) => {
     );
   }
 
-  const userId = user._id;
+  const email = user.email;
   try {
-    const user = await UserModel.findById(userId);
+    const user = await UserModel.findOne({email});
     if (!user) {
       return Response.json(
         {

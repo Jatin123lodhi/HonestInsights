@@ -88,7 +88,7 @@ const UserPublicProfilePage = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-700 font-semibold text-lg">
-                  Send Anonymous Message to @{params?.username}
+                  Send Anonymous Message to @{decodeURIComponent(params?.username as string)}
                 </FormLabel>
                 <FormControl>
                   <Textarea
