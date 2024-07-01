@@ -23,7 +23,7 @@ export const DELETE = async (
     );
   }
   try {
-    const userFound = await UserModel.findById(user._id);
+    const userFound = await UserModel.findOne({email:user.email});
     const messages = userFound?.messages;
     const msgIdx = messages?.findIndex((msg) => msg?._id?.toString() == params.messageId);
 
