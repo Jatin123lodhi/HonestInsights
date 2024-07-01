@@ -7,3 +7,5 @@ can send pictures with text
 response 
 toast
 please login - loader
+should manage reels, foodVilla, resume thing in portfolio webstie
+https://berry-botany-581.notion.site/List-of-my-work-4d1aa34b239042b4865db8203405b369 add urls here
