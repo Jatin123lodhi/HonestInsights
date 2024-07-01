@@ -110,8 +110,14 @@ const Dashboard = () => {
     fetchAcceptMessageState();
   }, [fetchAcceptMessageState, fetchMessages, session]);
 
-  if (!session || !session.user) return <div>Please login</div>;
-  const username = session.user?.username ||  session?.user?.email;
+  if (!session || !session.user)
+    return (
+      <div className="flex justify-center items-center pt-[10%]">
+        <div className="mx-4">Loading...</div>
+        <LoaderCircle className="animate-spin" />
+      </div>
+    );
+  const username = session.user?.username || session?.user?.email;
 
   const baseUrl = `${window.location.protocol}/${window.location.host}`;
   const profileUrl = `${baseUrl}/u/${username}`;
@@ -201,9 +207,9 @@ const Dashboard = () => {
               .fill("")
               .map((e, idx) => <MessageCardSkeleton key={idx} />)}
         </div>
-          {
-            !isMessagesLoading && messages?.length==0 && <div className="text-center">No Messages right now </div>
-          }
+        {!isMessagesLoading && messages?.length == 0 && (
+          <div className="text-center">No Messages right now </div>
+        )}
       </div>
     </>
   );
