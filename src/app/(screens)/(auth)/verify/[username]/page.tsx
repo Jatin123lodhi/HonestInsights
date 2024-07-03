@@ -46,22 +46,24 @@ const VerifyAccount = () => {
   }
   return (
     <Form {...form}>
-      <div>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="code"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Enter code</FormLabel>
-                <FormControl>
-                  <Input placeholder="code" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
+      <div className=" flex justify-center p-4 pt-12 ">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="shadow-lg  rounded-md border flex flex-col p-8 w-[450px]">
+          <div className='space-y-8 flex flex-col mt-8'>
+            <FormField
+              control={form.control}
+              name="code"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-lg'>Enter Verification code</FormLabel>
+                  <FormControl>
+                    <Input placeholder="code" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              />
+            <Button type="submit">Submit</Button>
+          </div>
         </form>
       </div>
     </Form>
