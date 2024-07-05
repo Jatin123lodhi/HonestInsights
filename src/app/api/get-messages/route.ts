@@ -37,7 +37,7 @@ export const GET = async (request: Request) => {
       },
       {
         $group: {
-          _id: "$_id",
+          _id: "$email",
           messages: {
             $push: "$messages",
           },
