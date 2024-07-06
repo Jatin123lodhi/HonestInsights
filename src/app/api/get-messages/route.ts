@@ -19,12 +19,12 @@ export const GET = async (request: Request) => {
     );
   }
 
-  const email = user.email
+  const email = user.email;
   try {
-    const user = await UserModel.aggregate([
+    const result = await UserModel.aggregate([
       {
         $match: {
-          email: email
+          email: email,
         },
       },
       {
@@ -44,31 +44,22 @@ export const GET = async (request: Request) => {
         },
       },
     ]);
-    if (!user || user.length === 0) {
-      return Response.json(
-        {
-          success: false,
-          message: "User not found",
-        },
-        { status: 401 }
-      );
-    }
     return Response.json(
       {
         success: true,
         message: "Not Authenticated",
-        messages: user[0].messages
+        messages: result?.[0]?.messages,
       },
       { status: 200 }
     );
   } catch (error) {
-    console.error(`Something went wrong : ${error}`)
+    console.error(`Something went wrong : ${error}`);
     return Response.json(
-        {
-          success: false,
-          message: "Something went wrong",
-        },
-        { status: 500 }
-      );
+      {
+        success: false,
+        message: "Something went wrong",
+      },
+      { status: 500 }
+    );
   }
 };
