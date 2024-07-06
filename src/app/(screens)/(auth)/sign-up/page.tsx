@@ -194,6 +194,7 @@ const Signup = () => {
               )}
             </Button>
             <Button className="font-bold" type="button" onClick={()=>signIn("github")}>Signup with Github <Image className="ml-2" height={20} width={20} src={"/github-logo.png"} alt="logo"/></Button>
+            <Button className="font-bold" type="button" onClick={()=>signIn("google")}>Signin with Google</Button>
           </div>
           <div className="text-center my-4">{`Already a member ?  `}<Link className=" text-blue-600 font-semibold" href="/sign-in">SignIn</Link></div>
         </form>
