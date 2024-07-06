@@ -185,7 +185,7 @@ const Dashboard = () => {
         {/* refresh button  */}
         <div className="mt-4">
           <Button onClick={handleRefresh}>
-            {isMessagesLoading ? (
+            {isMessagesLoading && acceptMessageState ? (
               <LoaderCircle className="animate-spin" />
             ) : (
               <RefreshCcw size={"22"} />
@@ -202,7 +202,7 @@ const Dashboard = () => {
               onDeleteSuccess={() => fetchMessages()}
             />
           ))}
-          {isMessagesLoading &&
+          {isMessagesLoading && acceptMessageState &&
             new Array(6)
               .fill("")
               .map((e, idx) => <MessageCardSkeleton key={idx} />)}
