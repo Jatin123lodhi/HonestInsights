@@ -19,14 +19,14 @@ const Home = () => {
     <div className="flex flex-col  justify-center min-h-screen  border border-gray-400">
       <Navbar />
       <div className="flex-grow flex flex-col justify-center items-center gap-4">
-        <div className="text-4xl font-bold">
+        <div className="text-4xl font-bold px-6 sm:p-0">
           Dive into the World of Anonymous Feedback
         </div>
-        <div className="text-lg">
+        <div className="text-lg px-6 sm:p-0 ">
           True feedback where your identify remains a secret
         </div>
         {/* crousel  */}
-        <Carousel plugins={[Autoplay({ delay: 2000,stopOnMouseEnter:true,stopOnInteraction:false })]} className="w-full max-w-[500px]">
+        <Carousel plugins={[Autoplay({ delay: 2000,stopOnMouseEnter:true,stopOnInteraction:false })]} className="w-[360px] sm:max-w-[500px]">
           <CarouselContent>
             {messages.map((message, index) => (
               <CarouselItem key={index}>
@@ -44,8 +44,7 @@ const Home = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          
         </Carousel>
       </div>
       <Footer />

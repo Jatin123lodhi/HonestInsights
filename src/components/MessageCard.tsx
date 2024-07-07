@@ -47,7 +47,7 @@ const MessageCard = ({message,onDeleteSuccess}: MessageCardProps) => {
         <CardTitle>{message?.content ?? "Some Message Title"}</CardTitle>
         <CardDescription className='pt-2'>{dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}</CardDescription>
       </CardHeader>
-      <div className=' p-5'>
+      <div className='p-5'>
         <AlertDialogComp handleContinue={handleDeleteConfirm} />
       </div>
       </div>

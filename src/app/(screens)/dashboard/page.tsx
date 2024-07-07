@@ -112,7 +112,7 @@ const Dashboard = () => {
 
   if (!session || !session.user)
     return (
-      <div className="flex justify-center items-center pt-[10%]">
+      <div className="flex flex-1 justify-center items-center pt-[10%]">
         <div className="mx-4">Loading...</div>
         <LoaderCircle className="animate-spin" />
       </div>

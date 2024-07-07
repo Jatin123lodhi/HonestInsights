@@ -80,7 +80,7 @@ const UserPublicProfilePage = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 mx-[16%] mt-4"
+          className="space-y-8 sm:mx-[16%] mt-4"
         >
           <FormField
             control={form.control}
@@ -113,9 +113,9 @@ const UserPublicProfilePage = () => {
           <Separator/>
           {/* suggestion part  */}
           <div>
-            <div className="my-4 font-semibold text-lg">Click on any message below to select it.</div>
+            <div className="my-4 font-semibold sm:text-lg">Click on any message below to select it.</div>
             <div className="p-8 rounded-md border shadow-md bg-white">
-              <div className="my-2 flex justify-between items-center">
+              <div className="my-2 flex flex-col gap-4 sm:gap-0 sm:flex-row justify-between items-center">
                 <div className="text-xl font-semibold">Messages</div>
                 <Button type="button">Suggest Messages</Button>
               </div>

@@ -101,18 +101,18 @@ const Signup = () => {
 
   return (
     <Form {...form}>
-      <div className=" flex justify-center p-4">
+      <div className=" flex flex-col sm:flex-row justify-center p-4">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="shadow-lg rounded-md border flex flex-col px-8 py-4 w-[450px]"
+          className="shadow-2xl rounded-md border flex flex-col px-8 py-4 sm:w-[450px]"
         >
-          <div className="text-4xl my-2 font-bold text-center">
+          <div className="text-3xl my-1 font-bold text-center">
             Welcome to Honest Insights
           </div>
-          <div className="text-center  mt-4">
+          <div className="text-center  mt-2">
             Sign up to start your anonymous adventure
           </div>
-          <div className="space-y-8 flex flex-col mt-8">
+          <div className="space-y-6 flex flex-col mt-8">
             <FormField
               control={form.control}
               name="username"
@@ -179,24 +179,64 @@ const Signup = () => {
                 </FormItem>
               )}
             />
-            <Button
-              className="font-bold"
-              type="submit"
-              disabled={isSubmitting || usernameMessage.includes("taken")}
-            >
-              {isSubmitting ? (
-                <div className="flex items-center gap-2">
-                  <span>Loading</span>
-                  <Loader className="animate-spin" />
-                </div>
-              ) : (
-                "Signup"
-              )}
-            </Button>
-            <Button className="font-bold" type="button" onClick={()=>signIn("github")}>Signup with Github <Image className="ml-2" height={20} width={20} src={"/github-logo.png"} alt="logo"/></Button>
-            <Button className="font-bold" type="button" onClick={()=>signIn("google")}>Signin with Google</Button>
+            <div className="flex flex-col space-y-4">
+              <Button
+                className="font-bold"
+                type="submit"
+                disabled={isSubmitting || usernameMessage.includes("taken")}
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <span>Loading</span>
+                    <Loader className="animate-spin" />
+                  </div>
+                ) : (
+                  "Signup"
+                )}
+              </Button>
+              <div className="flex items-center gap-4 ">
+                <div className="border flex-1"></div>
+                <div>Or</div>
+                <div className="border flex-1"></div>
+              </div>
+              <div className="flex flex-col sm:flex-row items-center -mt-4 gap-4 justify-center ">
+                <Button
+                  className="font-semibold flex-1 w-full"
+                  type="button"
+                  onClick={() => signIn("github")}
+                >
+                  Signup with Github
+                  <Image
+                    className="ml-2"
+                    height={20}
+                    width={20}
+                    src={"/github-logo.png"}
+                    alt="logo"
+                  />
+                </Button>
+                <Button
+                  className="font-semibold flex-1 w-full"
+                  type="button"
+                  onClick={() => signIn("google")}
+                >
+                  Signup with Google
+                  <Image
+                    className="ml-2"
+                    height={20}
+                    width={20}
+                    src={"/google.png"}
+                    alt="logo"
+                  />
+                </Button>
+              </div>
+            </div>
           </div>
-          <div className="text-center my-4">{`Already a member ?  `}<Link className=" text-blue-600 font-semibold" href="/sign-in">SignIn</Link></div>
+          <div className="text-center mt-4">
+            {`Already a member ?  `}
+            <Link className=" text-blue-600 font-semibold" href="/sign-in">
+              SignIn
+            </Link>
+          </div>
         </form>
       </div>
     </Form>
