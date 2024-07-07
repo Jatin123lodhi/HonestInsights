@@ -56,7 +56,6 @@ const Signin = () => {
         });
       }
 
-      console.log(`Response : ${JSON.stringify(response)}`);
       if (response?.status === 200) {
         toast({ description: "Signin Successfull!" });
         router.replace("/dashboard");
