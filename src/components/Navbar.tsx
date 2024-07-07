@@ -18,8 +18,8 @@ const Navbar = () => {
         return (
           <div
             className={`${
-              isExpanded ? "flex flex-col" : "hidden"
-            } sm:flex-row  gap-4 sm:items-center`}
+              isExpanded ? "flex flex-col " : "hidden"
+            } sm:flex sm:flex-row  gap-4 sm:items-center`}
           >
             <div className="flex items-center gap-4 mt-4 sm:mt-0">
               <AvatarComp
