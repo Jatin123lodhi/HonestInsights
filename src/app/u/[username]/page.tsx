@@ -71,7 +71,7 @@ const UserPublicProfilePage = () => {
   };
 
   return (
-    <div className=" px-[8%] py-[2%] bg-slate-100">
+    <div className="px-[4%] sm:px-[8%] py-[2%] bg-slate-100">
       <div className="flex justify-center my-10 text-4xl font-bold">
         Public Profile Link
       </div>
