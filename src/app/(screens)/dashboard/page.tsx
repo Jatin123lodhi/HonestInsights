@@ -156,9 +156,9 @@ const Dashboard = () => {
         <div className="text-3xl pt-8">User Dashboard</div>
 
         <div className="text-lg mt-8">Copy your unique link</div>
-        <div className="flex gap-4 mt-2">
+        <div className="flex gap-4 mt-2 border flex-col sm:flex-row">
           <input
-            className="flex-1 rounded-md px-4 bg-[#e0e8f2]"
+            className="flex-1 rounded-md px-4 py-2 bg-[#e0e8f2]"
             type="text"
             value={profileUrl}
             disabled
@@ -202,7 +202,8 @@ const Dashboard = () => {
               onDeleteSuccess={() => fetchMessages()}
             />
           ))}
-          {isMessagesLoading && acceptMessageState &&
+          {isMessagesLoading &&
+            acceptMessageState &&
             new Array(6)
               .fill("")
               .map((e, idx) => <MessageCardSkeleton key={idx} />)}

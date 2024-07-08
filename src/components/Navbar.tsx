@@ -18,7 +18,7 @@ const Navbar = () => {
         return (
           <div
             className={`${
-              isExpanded ? "flex flex-col " : "hidden"
+              isExpanded ? "flex flex-col pb-4" : "hidden"
             } sm:flex sm:flex-row  gap-4 sm:items-center`}
           >
             <div className="flex items-center gap-4 mt-4 sm:mt-0">
@@ -31,6 +31,7 @@ const Navbar = () => {
                 {data?.user?.username || data?.user?.email}
               </div>
             </div>
+
             <Button
               onClick={() => {
                 signOut(), setIsExpanded(false);
@@ -68,7 +69,11 @@ const Navbar = () => {
     }
   };
   return (
-    <div className={`px-4 py-3 text-white ${status==='authenticated' ? 'sm:flex' : 'flex'} justify-around items-center bg-gray-800`}>
+    <div
+      className={`px-4 py-3 text-white ${
+        status === "authenticated" ? "sm:flex" : "flex"
+      } justify-around items-center bg-gray-800`}
+    >
       <div className="flex justify-between items-center">
         <div
           className="font-bold text-xl cursor-pointer"
@@ -84,8 +89,8 @@ const Navbar = () => {
             <Image
               alt="hamBurgerIcon"
               src={"/ham.png"}
-              width={26}
-              height={26}
+              width={56}
+              height={56}
             />
           </div>
         )}
